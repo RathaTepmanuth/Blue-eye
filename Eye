@@ -1,0 +1,18 @@
+local function stringToCFrame(str)
+    local components = {str:match("([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)")}
+    for i = 1, #components do
+        components[i] = tonumber(components[i])
+    end
+    return CFrame.new(unpack(components))
+end
+ 
+local blueColor = ColorSequence.new(Color3.fromRGB(0, 0, 255)) -- Blue color
+
+local red4 = game.ReplicatedStorage.Resources.FiveSeasonsFX["CharFX"].EyeEmit:Clone()
+red4.Parent = game.Players.LocalPlayer.Character["Head"]
+for _, child in ipairs(red4:GetChildren()) do
+    if child:IsA("ParticleEmitter") then
+        child.Color = blueColor -- Change particle color to blue
+        child:Emit(20) -- Emit 20 particles
+    end
+end
